@@ -2,6 +2,8 @@ package com.ashhillmedia.pokeproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,13 +23,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = findViewById(R.id.list_view);
+        //listView = findViewById(R.id.list_view);
+        recyclerView = findViewById(R.id.recycler_view);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create());
@@ -40,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NamedAPIResourceList> call, Response<NamedAPIResourceList> response) {
                 List<NamedAPIResource> pokemonList = response.body().getResults();
-                listView.setAdapter(new PokemonListAdapter(MainActivity.this, pokemonList));
+                recyclerView.setAdapter(new MyAdapter(pokemonList));
             }
 
             @Override
@@ -49,4 +58,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
