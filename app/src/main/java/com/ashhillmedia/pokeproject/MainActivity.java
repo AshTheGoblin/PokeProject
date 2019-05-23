@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NamedAPIResourceList> call, Response<NamedAPIResourceList> response) {
                 List<NamedAPIResource> pokemonList = response.body().getResults();
-                recyclerView.setAdapter(new MyAdapter(pokemonList));
+                adapter = new MyAdapter(MainActivity.this, pokemonList);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override

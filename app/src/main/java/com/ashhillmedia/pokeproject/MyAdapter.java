@@ -1,7 +1,9 @@
 package com.ashhillmedia.pokeproject;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -12,31 +14,21 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<NamedAPIResource> values;
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView textView;
-
-        public MyViewHolder(TextView v) {
-            super(v);
-            textView = v;
-        }
-    }
+    private LayoutInflater inflater;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<NamedAPIResource> values) {
+    MyAdapter(Context context, List<NamedAPIResource> values) {
+        this.inflater = LayoutInflater.from(context);
         this.values = values;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+    public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
         // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_pagination, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        View view = inflater.inflate(R.layout.list_item_pagination, parent, false);
+        return new MyViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -56,5 +48,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public int getItemCount() {
         return values.size();
     }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        TextView textView;
+
+        MyViewHolder(View v) {
+            super(v);
+            textView = v.findViewById(R.id.list_item_pagination_text);
+        }
+    }
+
 
 }
