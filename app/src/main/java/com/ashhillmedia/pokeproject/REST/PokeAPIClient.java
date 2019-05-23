@@ -1,4 +1,4 @@
-package com.ashhillmedia.pokeproject;
+package com.ashhillmedia.pokeproject.REST;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
 import com.ashhillmedia.pokeproject.Data.Pokemon;

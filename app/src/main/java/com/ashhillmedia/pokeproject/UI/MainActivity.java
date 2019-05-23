@@ -1,16 +1,15 @@
-package com.ashhillmedia.pokeproject;
+package com.ashhillmedia.pokeproject.UI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResource;
 import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
-import com.ashhillmedia.pokeproject.Data.Pokemon;
+import com.ashhillmedia.pokeproject.R;
+import com.ashhillmedia.pokeproject.REST.PokeAPIClient;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView listView;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //listView = findViewById(R.id.list_view);
         recyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NamedAPIResourceList> call, Response<NamedAPIResourceList> response) {
                 List<NamedAPIResource> pokemonList = response.body().getResults();
-                adapter = new MyAdapter(MainActivity.this, pokemonList);
+                adapter = new RecyclerViewAdapter(MainActivity.this, pokemonList);
                 recyclerView.setAdapter(adapter);
             }
 

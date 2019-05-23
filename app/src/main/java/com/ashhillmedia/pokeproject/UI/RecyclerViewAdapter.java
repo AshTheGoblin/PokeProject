@@ -1,4 +1,4 @@
-package com.ashhillmedia.pokeproject;
+package com.ashhillmedia.pokeproject.UI;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResource;
+import com.ashhillmedia.pokeproject.R;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
     private List<NamedAPIResource> values;
     private LayoutInflater inflater;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    MyAdapter(Context context, List<NamedAPIResource> values) {
+     RecyclerViewAdapter(Context context, List<NamedAPIResource> values) {
         this.inflater = LayoutInflater.from(context);
         this.values = values;
     }
@@ -27,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
         // create a new view
-        View view = inflater.inflate(R.layout.list_item_pagination, parent, false);
+        View view = inflater.inflate(R.layout.card_view_item, parent, false);
         return new MyViewHolder(view);
     }
 
