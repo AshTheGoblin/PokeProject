@@ -3,10 +3,8 @@ package com.ashhillmedia.pokeproject.UI;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.DataSource;
 import android.arch.paging.PageKeyedDataSource;
-import android.arch.paging.PagedListAdapter;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResource;
-import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
 import com.ashhillmedia.pokeproject.PokemonListDataSource;
 
 public class PokemonListDataSourceFactory extends DataSource.Factory {

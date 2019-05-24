@@ -1,15 +1,14 @@
 package com.ashhillmedia.pokeproject;
 
 import android.arch.paging.PageKeyedDataSource;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResource;
 import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
 import com.ashhillmedia.pokeproject.REST.PokeAPIClient;
-import com.ashhillmedia.pokeproject.REST.PokeAPIInterface;
-import com.ashhillmedia.pokeproject.UI.RecyclerViewAdapter;
-
-import java.util.List;
+import com.ashhillmedia.pokeproject.UI.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +19,7 @@ public class PokemonListDataSource extends PageKeyedDataSource<Integer, NamedAPI
 
     public static final int PAGE_SIZE = 20;
     public static final int OFFSET = 0;
+
 
 
     @Override
@@ -37,7 +37,6 @@ public class PokemonListDataSource extends PageKeyedDataSource<Integer, NamedAPI
 
                     @Override
                     public void onFailure(Call<NamedAPIResourceList> call, Throwable t) {
-
                     }
                 });
     }
@@ -90,4 +89,6 @@ public class PokemonListDataSource extends PageKeyedDataSource<Integer, NamedAPI
             }
         });
     }
+
+
 }

@@ -7,7 +7,6 @@ import android.arch.paging.PageKeyedDataSource;
 import android.arch.paging.PagedList;
 
 import com.ashhillmedia.pokeproject.Data.NamedAPIResource;
-import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
 import com.ashhillmedia.pokeproject.PokemonListDataSource;
 
 public class PokemonListViewModel extends ViewModel {
