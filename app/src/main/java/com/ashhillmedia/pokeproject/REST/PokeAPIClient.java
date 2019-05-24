@@ -1,16 +1,28 @@
 package com.ashhillmedia.pokeproject.REST;
 
-import com.ashhillmedia.pokeproject.Data.NamedAPIResourceList;
-import com.ashhillmedia.pokeproject.Data.Pokemon;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.util.List;
+public class PokeAPIClient {
+    public static final String baseUrl = "https://pokeapi.co/api/v2/";
+    public static PokeAPIClient instance;
+    public static Retrofit retrofit;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+    public PokeAPIClient() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
 
-public interface PokeAPIClient {
+    public static synchronized PokeAPIClient getInstance(){
+        if (instance==null){
+            instance=new PokeAPIClient();
+        }
+        return instance;
+    }
 
-    @GET("pokemon/")
-    Call<NamedAPIResourceList> getPokemon();
+    public PokeAPIInterface  getApi(){
+        return retrofit.create(PokeAPIInterface.class);
+    }
 }
