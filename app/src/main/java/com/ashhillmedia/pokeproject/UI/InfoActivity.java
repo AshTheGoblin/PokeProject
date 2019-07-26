@@ -1,6 +1,8 @@
 package com.ashhillmedia.pokeproject.UI;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,16 +20,19 @@ import com.ashhillmedia.pokeproject.R;
 import com.ashhillmedia.pokeproject.REST.PokeAPIClient;
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class InfoActivity extends AppCompatActivity {
 
     private Pokemon pokemon;
     private PokemonSprites sprites;
-    private HorizontalScrollView scrollView;
-    private Response<Pokemon> response;
+  //  private HorizontalScrollView scrollView;
+  //  private Response<Pokemon> response;
     LinearLayout layout;
     private static String TAG = "InfoActivity.class";
 
@@ -64,7 +69,7 @@ public class InfoActivity extends AppCompatActivity {
                 .getPokemonInfo(name)
                 .enqueue(new Callback<Pokemon>() {
                     @Override
-                    public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                    public void onResponse(@NonNull Call<Pokemon> call, @NonNull Response<Pokemon> response) {
                         if (response.body() != null) {
                             pokemon = new Pokemon(response);
                             sprites = response.body().getSprites();
@@ -78,15 +83,25 @@ public class InfoActivity extends AppCompatActivity {
                             for (String s : sprites.spriteUrls()) {
                                 if (s != null) {
                                     ImageView image = new ImageView(getApplicationContext());
+                                    TextView text = new TextView(getApplicationContext());
+                                    String[]des=sprites.spriteDescriptions();
+                                    text.setText(des[s.indexOf(s)]);
                                     Glide.with(getApplicationContext())
                                             .load(s)
                                             .override(300)
                                             .placeholder(R.drawable.ic_launcher_foreground)
                                             .into(image);
                                     layout.addView(image);
+                                    layout.addView(text);
+
+                                    ConstraintSet set =new ConstraintSet();
+
+
 
                                 }
                             }
+
+
                         }
                     }
 

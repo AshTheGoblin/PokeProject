@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         PokemonListViewModel pokemonListViewModel = new ViewModelProviders().of(this).get(PokemonListViewModel.class);
-        final PokemonListAdapter adapter = new PokemonListAdapter();
+        final PokemonListAdapter adapter = new PokemonListAdapter(this);
 
         pokemonListViewModel.pokemonPagedList.observe(this, new Observer<PagedList<NamedAPIResource>>() {
             @Override
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+
+
     }
 
 }
